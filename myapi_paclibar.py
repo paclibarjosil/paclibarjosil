@@ -1,0 +1,47 @@
+from flask import Flask, jsonify, request
+
+app = Flask(__name__)
+
+
+# PART G - STUDENT API
+@app.route('/student')
+def get_student():
+    return jsonify({
+        "student_id": "28-00228",
+        "name": "Josil Paclibar",
+        "program": "BSIT",
+        "year": 3,
+        "section": "B - Dijkstra"
+    })
+
+
+# PART H - COURSE API
+@app.route('/course')
+def get_course():
+    return jsonify({
+        "course_code": "IT 3120",
+        "course_title": "Information Technology",
+        "instructor": "YOUR INSTRUCTOR",
+        "semester": "First Semester",
+        "academic_year": "2026-2027"
+    })
+
+
+# PART I - PERSONALIZED GREETING API
+@app.route('/greet')
+def greet():
+    name = request.args.get('name', 'Student')
+    section = request.args.get('section', 'BSIT 3 B Dijkstra')
+
+    return jsonify({
+        "message": f"Hello {name} from {section}!"
+    })
+
+
+# RUN SERVER
+if __name__ == '__main__':
+    app.run(
+        host="0.0.0.0",
+        port=5000,
+        debug=True
+    )
